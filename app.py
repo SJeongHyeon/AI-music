@@ -242,7 +242,7 @@ inject_app_style()
 st.markdown(
     """
     <div class="hero-shell">
-      <div class="hero-kicker">6강 · 기본 장르 예측기</div>
+      <div class="hero-kicker">기본 장르 예측기</div>
       <div class="hero-title">음악을 숫자로 읽는 가장 단순한 대시보드</div>
       <div class="hero-subtitle">WAV 1개를 넣으면 57개 피처로 장르를 예측하고, Top-3 확률과 멜스펙트로그램을 함께 보여줍니다.</div>
       <div class="pill-row">
