@@ -298,9 +298,9 @@ inject_app_style()
 st.markdown(
     """
     <div class="hero-shell">
-      <div class="hero-kicker">7강 · 고급 예측 대시보드</div>
+      <div class="hero-kicker">고급 예측 대시보드</div>
       <div class="hero-title">신뢰도, 이력, 멀티파일 비교를 한 화면에</div>
-      <div class="hero-subtitle">6강보다 더 정보 밀도가 높은 버전으로, 여러 곡의 확률 분포와 예측 기록을 함께 확인합니다.</div>
+      <div class="hero-subtitle">더 정보 밀도가 높은 버전으로, 여러 곡의 확률 분포와 예측 기록을 함께 확인합니다.</div>
       <div class="pill-row">
         <span class="pill">Confidence chart</span>
         <span class="pill">Session history</span>
