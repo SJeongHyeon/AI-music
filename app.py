@@ -25,6 +25,82 @@ else:
     matplotlib.rc("font", family="NanumGothic")
 plt.rcParams["axes.unicode_minus"] = False
 
+def inject_app_style():
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 44%, #EFF6FF 100%);
+        }
+        .block-container {
+            padding-top: 1.6rem;
+            padding-bottom: 2.5rem;
+            max-width: 1180px;
+        }
+        .hero-shell {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(148, 163, 184, 0.10));
+            border: 1px solid rgba(37, 99, 235, 0.16);
+            border-radius: 24px;
+            padding: 1.35rem 1.45rem;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+            margin-bottom: 1.1rem;
+        }
+        .hero-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #2563EB;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+        .hero-title {
+            font-size: 2.15rem;
+            line-height: 1.15;
+            font-weight: 800;
+            color: #0F172A;
+            margin: 0;
+        }
+        .hero-subtitle {
+            margin-top: 0.45rem;
+            color: #475569;
+            font-size: 0.98rem;
+        }
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.9rem;
+        }
+        .pill {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(37, 99, 235, 0.14);
+            border-radius: 999px;
+            padding: 0.35rem 0.78rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #1E3A8A;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.08);
+        }
+        .result-card {
+            background: white;
+            border: 1px solid #DBEAFE;
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.07);
+        }
+        .section-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #2563EB;
+            margin-bottom: 0.3rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 # ── 피처 컬럼 순서 (features_3_sec.csv 기준 57개) ──────
 FEATURE_COLS = (
     ["chroma_stft_mean","chroma_stft_var",
@@ -125,8 +201,24 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("🎵 음악 장르 예측기")
-st.caption("서정현 · 장르예측앱 — WAV 파일을 올리면 장르를 예측합니다")
+inject_app_style()
+
+st.markdown(
+    """
+    <div class="hero-shell">
+      <div class="hero-kicker">6강 · 기본 장르 예측기</div>
+      <div class="hero-title">음악을 숫자로 읽는 가장 단순한 대시보드</div>
+      <div class="hero-subtitle">WAV 1개를 넣으면 57개 피처로 장르를 예측하고, Top-3 확률과 멜스펙트로그램을 함께 보여줍니다.</div>
+      <div class="pill-row">
+        <span class="pill">RandomForest</span>
+        <span class="pill">57 features</span>
+        <span class="pill">Top-3 confidence</span>
+        <span class="pill">3 sec audio</span>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 # ── 사이드바: 지원 장르 목록 ────────────────────────────
 with st.sidebar:

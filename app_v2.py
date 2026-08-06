@@ -61,6 +61,97 @@ def setup_korean_font():
     return chosen
 
 setup_korean_font()
+
+def inject_app_style():
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background:
+                radial-gradient(circle at top left, rgba(124, 58, 237, 0.14), transparent 28%),
+                radial-gradient(circle at top right, rgba(37, 99, 235, 0.10), transparent 24%),
+                linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 42%, #EEF2FF 100%);
+        }
+        .block-container {
+            padding-top: 1.4rem;
+            padding-bottom: 2.6rem;
+            max-width: 1220px;
+        }
+        .hero-shell {
+            background: linear-gradient(135deg, #1E293B 0%, #312E81 52%, #2563EB 100%);
+            color: white;
+            border-radius: 28px;
+            padding: 1.45rem 1.6rem;
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18);
+            margin-bottom: 1.1rem;
+        }
+        .hero-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.86);
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+        }
+        .hero-title {
+            font-size: 2.1rem;
+            line-height: 1.14;
+            font-weight: 850;
+            color: white;
+            margin: 0;
+        }
+        .hero-subtitle {
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 0.98rem;
+        }
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.95rem;
+        }
+        .pill {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+            padding: 0.35rem 0.8rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: white;
+            backdrop-filter: blur(6px);
+        }
+        .stat-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin: 1rem 0 1.1rem 0;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(99, 102, 241, 0.14);
+            border-radius: 18px;
+            padding: 0.85rem 1rem;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+        }
+        .stat-label {
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #6366F1;
+            font-weight: 800;
+        }
+        .stat-value {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin-top: 0.25rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 FEATURE_COLS = (
     ["chroma_stft_mean","chroma_stft_var",
      "rms_mean","rms_var",
@@ -161,8 +252,44 @@ st.set_page_config(
     page_icon="🎵",
     layout="wide",
 )
-st.title("🎵 음악 장르 예측기")
-st.caption("서정현 · 장르예측앱 — WAV 파일을 올리면 장르를 예측합니다")
+inject_app_style()
+
+st.markdown(
+    """
+    <div class="hero-shell">
+      <div class="hero-kicker">7강 · 고급 예측 대시보드</div>
+      <div class="hero-title">신뢰도, 이력, 멀티파일 비교를 한 화면에</div>
+      <div class="hero-subtitle">6강보다 더 정보 밀도가 높은 버전으로, 여러 곡의 확률 분포와 예측 기록을 함께 확인합니다.</div>
+      <div class="pill-row">
+        <span class="pill">Confidence chart</span>
+        <span class="pill">Session history</span>
+        <span class="pill">Multi-file compare</span>
+        <span class="pill">Streamlit dashboard</span>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <div class="stat-strip">
+      <div class="stat-card">
+        <div class="stat-label">Input</div>
+        <div class="stat-value">WAV 업로드 + 멀티파일</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Output</div>
+        <div class="stat-value">Top-1, 확률 분포, 멜스펙트로그램</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Focus</div>
+        <div class="stat-value">신뢰도 + 이력 + 비교 시각화</div>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 # 이력 초기화
 if "history" not in st.session_state:
