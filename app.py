@@ -96,6 +96,42 @@ def inject_app_style():
             color: #2563EB;
             margin-bottom: 0.3rem;
         }
+        section[data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #EEF2FF 0%, #F8FAFC 100%);
+        }
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            border-radius: 20px;
+            padding: 1rem 0.95rem;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+        }
+        .sidebar-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin-bottom: 0.75rem;
+        }
+        .genre-chip-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+        }
+        .genre-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.10), rgba(255, 255, 255, 0.9));
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            border-radius: 14px;
+            padding: 0.45rem 0.7rem;
+            color: #0F172A;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+        .genre-chip span {
+            font-size: 1rem;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -222,9 +258,22 @@ st.markdown(
 
 # ── 사이드바: 지원 장르 목록 ────────────────────────────
 with st.sidebar:
-    st.header("지원 장르 (10종)")
-    for g in GENRES:
-        st.write(f"{GENRE_EMOJI.get(g, '')} {g}")
+    st.markdown(
+        """
+        <div class="sidebar-card">
+          <div class="sidebar-title">지원 장르 (10종)</div>
+          <div class="genre-chip-list">
+        """
+        + "".join(
+            f'<div class="genre-chip"><span>{GENRE_EMOJI.get(g, "")}</span><span>{g}</span></div>'
+            for g in GENRES
+        )
+        + """
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.divider()
     st.caption("모델: RandomForest (재학습, 57피처)")
     st.caption("피처: librosa 57개")
