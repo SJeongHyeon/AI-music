@@ -1,0 +1,7 @@
+Data/
+__pycache__/
+.pytest_cache/
+*.log
+streamlit_v2.*
+d8_fallback_data/
+.superpowers/
