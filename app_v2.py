@@ -181,7 +181,7 @@ with st.sidebar:
     st.caption("모델: RandomForest (57피처)")
     st.caption("피처: librosa 57개")
     st.caption("이 앱은 위 10개 장르만 구분합니다.")
-    st.caption("7강 기능: 신뢰도 + 이력 + 멀티파일 비교")
+    st.caption("신뢰도 + 이력 + 멀티파일 비교")
 
 with st.spinner("모델 로딩 중... (최초 1회)"):
     try:
